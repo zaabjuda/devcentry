@@ -5,13 +5,13 @@ __copyright__ = "Copyright 2015, Dmitry Zhiltsov"
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from extuser.form import ExtUserChangeForm, ExtUserCreationForm
-from extuser.models import ExtUser, ExtGroupRepos
+from devcentryuser.form import DevcentryUserChangeForm, DevcentryUserCreationForm
+from devcentryuser.models import DevcentryUser, DevcentryGroupRepos
 
 
-class ExtUserAdmin(UserAdmin):
-    form = ExtUserChangeForm
-    add_form = ExtUserCreationForm
+class DevcentryUserAdmin(UserAdmin):
+    form = DevcentryUserChangeForm
+    add_form = DevcentryUserCreationForm
 
     list_display = ('username', 'email', 'is_staff', 'is_superuser')
     list_filter = ('is_superuser',)
@@ -33,9 +33,9 @@ class ExtUserAdmin(UserAdmin):
     filter_horizontal = ('groups', 'user_permissions')
 
 
-class ExtGroupReposAdmin(admin.ModelAdmin):
+class DevcentryGroupReposAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(ExtUser, ExtUserAdmin)
-admin.site.register(ExtGroupRepos, ExtGroupReposAdmin)
+admin.site.register(DevcentryUser, DevcentryUserAdmin)
+admin.site.register(DevcentryGroupRepos, DevcentryGroupReposAdmin)

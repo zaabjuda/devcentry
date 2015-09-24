@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'extuser',
+    'devcentryuser',
     'core',
     'repositories',
 )
@@ -88,7 +88,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'extuser.ExtUser'
+AUTH_USER_MODEL = 'devcentryuser.DevcentryUser'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

@@ -5,23 +5,23 @@ __copyright__ = "Copyright 2015, Dmitry Zhiltsov"
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from django.forms import CharField, PasswordInput, ValidationError
 
-from extuser.models import ExtUser
+from devcentryuser.models import DevcentryUser
 
 
-class ExtUserCreationForm(UserCreationForm):
+class DevcentryUserCreationForm(UserCreationForm):
     password1 = CharField(label='Password', widget=PasswordInput)
     password2 = CharField(label='Password Confirmation', widget=PasswordInput)
 
     class Meta(UserCreationForm.Meta):
-        model = ExtUser
+        model = DevcentryUser
         fields = ('email', 'username')
 
     def clean_username(self):
         username = self.cleaned_data['username']
 
         try:
-            ExtUser._default_manager.get(username=username)
-        except ExtUser.DoesNotExist:
+            DevcentryUser._default_manager.get(username=username)
+        except DevcentryUser.DoesNotExist:
             return username
         raise ValidationError(self.error_messages['duplicate_username'])
 
@@ -41,11 +41,11 @@ class ExtUserCreationForm(UserCreationForm):
         return user
 
 
-class ExtUserChangeForm(UserChangeForm):
+class DevcentryUserChangeForm(UserChangeForm):
     password = ReadOnlyPasswordHashField(label='password', help_text='There is no way to see this password.')
 
     class Meta(UserChangeForm.Meta):
-        model = ExtUser
+        model = DevcentryUser
         fields = ('username', 'email', 'password', 'is_active', 'is_staff', 'is_superuser', 'user_permissions')
 
     def clean_password(self):

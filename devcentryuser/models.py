@@ -8,7 +8,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 
 
-class ExtUserManager(BaseUserManager):
+class DevcentryUserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
         if not email:
             raise ValueError('User must have email')
@@ -28,7 +28,7 @@ class ExtUserManager(BaseUserManager):
         return user
 
 
-class ExtUser(AbstractBaseUser, PermissionsMixin):
+class DevcentryUser(AbstractBaseUser, PermissionsMixin):
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', message='Only alphanumeric characters are allowed.')
 
     username = models.CharField(unique=True, max_length=30, validators=[alphanumeric])
@@ -42,7 +42,7 @@ class ExtUser(AbstractBaseUser, PermissionsMixin):
 
     user_bio = models.TextField()
 
-    objects = ExtUserManager()
+    objects = DevcentryUserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -57,6 +57,6 @@ class ExtUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class ExtGroupRepos(models.Model):
+class DevcentryGroupRepos(models.Model):
     name = models.CharField(max_length=250, unique=True)
-    users = models.ManyToManyField(ExtUser)
+    users = models.ManyToManyField(DevcentryUser)
