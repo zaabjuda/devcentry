@@ -23,9 +23,9 @@ class Repository(models.Model):
     repo_type = models.PositiveSmallIntegerField(verbose_name=_("VCS Type"), null=False, choices=VCS_TYPES,
                                                  default=VcsTypes.git.value)
     owner = models.ForeignKey(DevcentryUser, null=False, verbose_name=_("Repository owner"))
-    readers = models.ManyToManyField(DevcentryUser, related_name='repos_users_readers')
-    writers = models.ManyToManyField(DevcentryUser, related_name='repos_users_writers')
+    readers = models.ManyToManyField(DevcentryUser, related_name='repos_users_readers', blank=True)
+    writers = models.ManyToManyField(DevcentryUser, related_name='repos_users_writers', blank=True)
     read_only = models.BooleanField(default=False)
     description = models.CharField(max_length=2048, null=True)
-    g_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_readers')
-    r_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_writers')
+    g_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_readers', blank=True)
+    r_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_writers', blank=True)
