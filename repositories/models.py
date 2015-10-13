@@ -29,3 +29,10 @@ class Repository(models.Model):
     description = models.CharField(max_length=2048, null=True)
     g_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_readers', blank=True)
     r_readers = models.ManyToManyField(DevcentryGroupRepos, related_name='repos_groups_writers', blank=True)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.repo_type)
+
+    class Meta:
+        verbose_name = _("Repository")
+        verbose_name_plural = _("Repositories")
