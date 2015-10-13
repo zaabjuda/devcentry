@@ -93,7 +93,7 @@ AUTH_USER_MODEL = 'devcentryuser.DevcentryUser'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+# LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
