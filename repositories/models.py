@@ -13,8 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from devcentryuser.models import DevcentryUser, DevcentryGroupRepos
 
-
-VCS_TYPES = (('git', 'git'), )
+VCS_TYPES = (('git', 'git'),)
 
 
 class RepositoryNameSpace(models.Model):
@@ -37,7 +36,7 @@ class RepositoryNameSpace(models.Model):
 class Repository(models.Model):
     name = models.CharField(verbose_name=_("Repository Name"), max_length=250, unique=True, null=False)
     repo_type = models.CharField(verbose_name=_("VCS Type"), null=False, choices=VCS_TYPES, max_length=5,
-                                                 default='git')
+                                 default='git')
     owner = models.ForeignKey(DevcentryUser, null=False, verbose_name=_("Repository owner"))
     readers = models.ManyToManyField(DevcentryUser, related_name='repos_users_readers', blank=True)
     writers = models.ManyToManyField(DevcentryUser, related_name='repos_users_writers', blank=True)
