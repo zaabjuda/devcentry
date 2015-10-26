@@ -2,10 +2,13 @@
 __author__ = "Dmitry Zhiltsov"
 __copyright__ = "Copyright 2015, Dmitry Zhiltsov"
 
+import os
+
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator
-
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class DevcentryUserManager(BaseUserManager):
@@ -60,3 +63,15 @@ class DevcentryUser(AbstractBaseUser, PermissionsMixin):
 class DevcentryGroupRepos(models.Model):
     name = models.CharField(max_length=250, unique=True)
     users = models.ManyToManyField(DevcentryUser)
+
+
+@receiver(post_save, sender=DevcentryUser)
+def create_repo(sender, instance, created, **kwargs):
+    if created:
+        from repositories.models import RepositoryNameSpace
+        ns = RepositoryNameSpace(name=instance.username, is_project=False, owner=instance)
+        if not os.path.exists(ns.abs_path):
+                os.mkdir(ns.abs_path)
+        else:
+            raise Exception
+        ns.save()

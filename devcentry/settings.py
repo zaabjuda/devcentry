@@ -112,6 +112,8 @@ LANGUAGES = (
 
 STATIC_URL = '/static/'
 
+VCS_REPO_DIR = '/var/devcentry'
+
 try:
     from . import local_settings
 except ImportError as exc:
